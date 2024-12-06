@@ -1,0 +1,14 @@
+/* Tailwind core */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Demos */
+@import "demos/demo1";
+@import "vazirmatn/Vazirmatn-font-face.css";
+/* Shadcn UI */
+@import "shadcn.ui";
+
+body {
+    font-family: Vazirmatn;
+}
