@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
-import { DataGridInner, DataGridProvider } from '.';
+import { DataGridInner, DataGridProvider, useDataGrid } from '.';
 import {
   ColumnFiltersState,
+  Row,
   RowSelectionState,
   SortingState,
   Table,
@@ -22,7 +23,8 @@ export type TDataGridRequestParams = {
 export interface TDataGridProps<TData extends object> {
   columns: any[];
   data?: TData[];
-  rowSelection?: boolean;
+  selectedRows?: string[];
+  rowSelection?: boolean | ((row: Row<TData>) => boolean);
   getRowId?: TableOptions<TData>['getRowId'];
   onRowSelectionChange?: (state: RowSelectionState, table?: Table<TData>) => void;
   messages?: {
@@ -57,11 +59,13 @@ export interface TDataGridProps<TData extends object> {
   onFetchData?: (params: TDataGridRequestParams) => Promise<any>;
   children?: ReactNode;
 }
-
 export const DataGrid = <TData extends object>(props: TDataGridProps<TData>) => {
+  const { resetRowSelection, ...otherContext } = useDataGrid();
+
   return (
     <DataGridProvider {...props}>
       <DataGridInner />
     </DataGridProvider>
   );
 };
+

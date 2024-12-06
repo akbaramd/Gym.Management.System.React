@@ -27,7 +27,8 @@ export interface IDataGridContextProps<TData extends object> {
   totalRows: number;
   loading: boolean;
   setLoading: (state: boolean) => void;
-  reload: () => void
+  reload: () => void,
+  resetRowSelection: () => void,
 }
 
 const DataGridContext = createContext<IDataGridContextProps<any> | undefined>(undefined);
@@ -74,10 +75,19 @@ export const DataGridProvider = <TData extends object>(props: TDataGridProps<TDa
     pageIndex: props.pagination?.page ?? 0,
     pageSize: props.pagination?.size ?? 5
   });
-  const [rowSelection, setRowSelection] = useState(mergedProps.rowSelection);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>(
+    props.selectedRows?.reduce((acc, id) => {
+      acc[id] = true;
+      return acc;
+    }, {} as RowSelectionState) || {}
+  );
   const [sorting, setSorting] = useState<SortingState>(mergedProps.sorting ?? []);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
+  const resetRowSelection = useCallback(() => {
+    setRowSelection({});
+  }, []);
 
   const fetchServerSideData = useCallback(async () => {
     if (loading || !mergedProps.onFetchData) return;
@@ -96,12 +106,13 @@ export const DataGridProvider = <TData extends object>(props: TDataGridProps<TDa
 
       setData(data || []);
       setTotalRows(totalCount || 0);
+      resetRowSelection(); // Clear selection when data is refreshed
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
       setLoading(false);
     }
-  }, [loading, pagination, sorting, columnFilters, mergedProps.onFetchData]);
+  }, [loading, pagination, sorting, columnFilters, mergedProps.onFetchData, resetRowSelection]);
 
   const debouncedFetchData = debounce(fetchServerSideData, 100);
 
@@ -109,14 +120,14 @@ export const DataGridProvider = <TData extends object>(props: TDataGridProps<TDa
     if (mergedProps.serverSide) {
       debouncedFetchData();
     } else {
-      setLoading(true); // Show loading bar for local data
+      setLoading(true);
       setData(mergedProps.data || []);
       setTotalRows(mergedProps.data ? mergedProps.data.length : 0);
-      setLoading(false); // Hide loading bar after data is set
+      resetRowSelection(); // Clear selection when local data is refreshed
+      setLoading(false);
     }
-  }
+  };
 
-  // Trigger debounced fetch for server-side data; load local data if serverSide is false
   useEffect(() => {
     loadData();
   }, [pagination, sorting, columnFilters, mergedProps.data, mergedProps.serverSide]);
@@ -126,9 +137,9 @@ export const DataGridProvider = <TData extends object>(props: TDataGridProps<TDa
       typeof updaterOrValue === 'function' ? updaterOrValue(prev) : updaterOrValue
     );
 
-    if (mergedProps.onRowSelectionChange) {
+    if (props.onRowSelectionChange) {
       const newSelection = typeof updaterOrValue === 'function' ? updaterOrValue(rowSelection) : updaterOrValue;
-      mergedProps.onRowSelectionChange(newSelection, table);
+      props.onRowSelectionChange(newSelection, table);
     }
   };
 
@@ -169,7 +180,8 @@ export const DataGridProvider = <TData extends object>(props: TDataGridProps<TDa
         totalRows,
         loading,
         setLoading,
-        reload: loadData
+        reload: loadData,
+        resetRowSelection, // Expose resetRowSelection to the context
       }}
     >
       <DataGridInner />

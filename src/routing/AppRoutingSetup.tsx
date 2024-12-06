@@ -83,6 +83,7 @@ import {
   AuthenticationGetStartedPage
 } from '@/pages/authentication';
 import { UserListPage } from '@/pages/identity/users/user-list';
+import { RoleListPage } from '@/pages/identity/roles/role-list';
 
 const AppRoutingSetup = (): ReactElement => {
   return (
@@ -91,6 +92,7 @@ const AppRoutingSetup = (): ReactElement => {
         <Route element={<Demo1Layout />}>
 
           <Route path="/identity/users" element={<UserListPage />} />
+          <Route path="/identity/roles" element={<RoleListPage />} />
 
           <Route path="/" element={<DefaultPage />} />
           <Route path="/dark-sidebar" element={<Demo1DarkSidebarPage />} />
