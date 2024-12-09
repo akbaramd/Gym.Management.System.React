@@ -57,7 +57,7 @@ const SidebarMenuDashboard = () => {
 
   const menuItems: IMenuItem[] = [
     {
-      title: 'Configuration',
+      title: 'داشبورد',
       children: [
         {
           title: 'API Setup',
@@ -213,7 +213,7 @@ const SidebarMenuDashboard = () => {
 
   return (
     <div className="flex flex-col gap-7.5 px-2">
-      {buildDropdown()}
+      {/* {buildDropdown()} */}
       {buildMenu()}
     </div>
   );

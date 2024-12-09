@@ -3,12 +3,12 @@ import { IScrollspyMenuItems, ScrollspyMenu } from '@/partials/menu';
 const AccountSettingsSidebar = () => {
   const items: IScrollspyMenuItems = [
     {
-      title: 'حساب کاربری',
-      target: 'basic_settings',
+      title: 'ویرایش پروفایل',
+      target: 'profile-edit-form',
       active: true
     },
     {
-      title: 'خروج از حساب کاربری',
+      title: 'خروج حساب کاربری',
       target: 'delete_account'
     }
   ];

@@ -19,6 +19,12 @@ const menuItems: IMenuItem[] = [
   { icon: 'chart-line-star', tooltip: 'Dashboard', path: '/', rootPath: '/' },
   {
     icon: 'profile-circle',
+    tooltip: 'کاربران',
+    path: '/identity/users',
+    rootPath: '/identity/'
+  },
+  {
+    icon: 'profile-circle',
     tooltip: 'Profile',
     path: '/public-profile/profiles/default',
     rootPath: '/public-profile/'

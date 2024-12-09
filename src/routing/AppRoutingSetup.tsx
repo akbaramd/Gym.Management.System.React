@@ -84,6 +84,9 @@ import {
 } from '@/pages/authentication';
 import { UserListPage } from '@/pages/identity/users/user-list';
 import { RoleListPage } from '@/pages/identity/roles/role-list';
+import { Demo3Layout } from '@/layouts/demo3';
+import { Demo4Layout } from '@/layouts/demo4';
+import { AccountProfilePage, AccountSettingsSidebar, AccountSettingsSidebarContent } from '@/pages/identity/profile';
 
 const AppRoutingSetup = (): ReactElement => {
   return (
@@ -91,6 +94,7 @@ const AppRoutingSetup = (): ReactElement => {
       <Route element={<RequireAuth />}>
         <Route element={<Demo1Layout />}>
 
+        <Route path="/account/profile" element={<AccountProfilePage />} />
           <Route path="/identity/users" element={<UserListPage />} />
           <Route path="/identity/roles" element={<RoleListPage />} />
 

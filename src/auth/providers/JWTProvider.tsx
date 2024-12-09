@@ -30,6 +30,8 @@ interface AuthContextProps {
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
   login: (mobileNumber: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  updateProfile : (firstName: string, lastName: string) => Promise<void>;
+  uploadAvatar : (file: File) => Promise<void>;
   verify: () => Promise<void>;
   // Removed register, requestPasswordResetLink, and changePassword methods since they are not defined in the provided Swagger.
   // Add them back if your API supports them and you know the correct endpoints and request bodies.
@@ -66,7 +68,18 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       setCurrentUser(undefined);
     }
   };
-
+  const updateProfile = async (firstName: string, lastName: string) => {
+    try {
+      const { data: updatedUser } = await axios.put(PROFILE_URL, {
+        firstName,
+        lastName
+      });
+      setCurrentUser(updatedUser);
+    } catch (error) {
+      console.error('Profile update error:', error);
+      throw new Error(`Profile update failed: ${error}`);
+    }
+  };
   const saveAuth = (auth: AuthModel | undefined) => {
     setAuth(auth);
     if (auth) {
@@ -75,7 +88,20 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       authHelper.removeAuth();
     }
   };
+  const uploadAvatar = async (file: File) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
 
+    try {
+      const { data: updatedUser } = await axios.post(AVATAR_URL, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setCurrentUser(updatedUser);
+    } catch (error) {
+      console.error('Avatar upload error:', error);
+      throw new Error(`Avatar upload failed: ${error}`);
+    }
+  };
   const login = async (mobileNumber: string, password: string) => {
     try {
       const { data: authResult } = await axios.post(LOGIN_URL, {
@@ -125,6 +151,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         setLoading,
         auth,
         saveAuth,
+        uploadAvatar,
+        updateProfile,
         currentUser,
         setCurrentUser,
         login,

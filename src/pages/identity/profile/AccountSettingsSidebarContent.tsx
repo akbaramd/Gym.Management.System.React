@@ -1,24 +1,13 @@
 import { useResponsive, useScrollPosition } from '@/hooks';
 import {
-  AdvancedSettingsAddress,
-  AdvancedSettingsAppearance,
-  AdvancedSettingsNotifications,
-  AdvancedSettingsPreferences,
-  AuthEmail,
-  AuthPassword,
-  AuthSingleSingOn,
-  AuthSocialSignIn,
-  AuthTwoFactor,
-  BasicSettings,
-  DeleteAccount,
-  ExternalServicesIntegrations,
-  ExternalServicesManageApi
+  ProfileEditForm,
+  LogoutForm,
 } from './blocks';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { Scrollspy } from '@/components/scrollspy/Scrollspy';
-import { AccountSettingsSidebar } from '@/pages/account/home/settings-sidebar';
 import { useLayout } from '@/providers';
+import { AccountSettingsSidebar } from './AccountSettingsSidebar';
 
 const stickySidebarClasses: Record<string, string> = {
   'demo1-layout': 'top-[calc(var(--tw-header-height)+1rem)]',
@@ -75,8 +64,8 @@ const AccountSettingsSidebarContent = () => {
       )}
 
       <div className="flex flex-col items-stretch grow gap-5 lg:gap-7.5">
-        <BasicSettings />
-        <DeleteAccount />
+        <ProfileEditForm />
+        <LogoutForm />
       </div>
     </div>
   );

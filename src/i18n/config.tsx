@@ -1,11 +1,13 @@
 import { toAbsoluteUrl } from '@/utils';
 import arMessages from './messages/ar.json';
 import enMessages from './messages/en.json';
+import irMessages from './messages/ir.json';
 import frMessages from './messages/fr.json';
 import zhMessages from './messages/zh.json';
 import { type TLanguage } from './types.d';
 
 const I18N_MESSAGES = {
+  ir: irMessages,
   en: enMessages,
   ar: arMessages,
   fr: frMessages,
@@ -15,6 +17,13 @@ const I18N_MESSAGES = {
 const I18N_CONFIG_KEY = 'i18nConfig';
 
 const I18N_LANGUAGES: readonly TLanguage[] = [
+  {
+    label: 'فارسی',
+    code: 'ir',
+    direction: 'rtl',
+    flag: toAbsoluteUrl('/media/flags/iran.svg'),
+    messages: I18N_MESSAGES.ir
+  },
   {
     label: 'English',
     code: 'en',

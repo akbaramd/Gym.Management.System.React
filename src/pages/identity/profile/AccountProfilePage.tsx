@@ -12,7 +12,7 @@ import { PageNavbar } from '@/pages/account';
 import { AccountSettingsSidebarContent } from '.';
 import { useLayout } from '@/providers';
 
-const AccountSettingsSidebarPage = () => {
+const AccountProfilePage = () => {
   const { currentLayout } = useLayout();
 
   return (
@@ -24,7 +24,7 @@ const AccountSettingsSidebarPage = () => {
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>ویرایش حساب کاربری</ToolbarDescription>
+              <ToolbarDescription>مدیریت پروفایل کاربری</ToolbarDescription>
             </ToolbarHeading>
           </Toolbar>
         </Container>
@@ -37,4 +37,4 @@ const AccountSettingsSidebarPage = () => {
   );
 };
 
-export { AccountSettingsSidebarPage };
+export { AccountProfilePage  };

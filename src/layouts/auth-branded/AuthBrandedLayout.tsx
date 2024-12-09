@@ -13,10 +13,10 @@ const Layout = () => {
       <style>
         {`
           .branded-bg {
-            background-image: url('${toAbsoluteUrl('/media/images/2600x1600/1.png')}');
+            background-image: url('${toAbsoluteUrl('/media/back.jpg')}');
           }
           .dark .branded-bg {
-            background-image: url('${toAbsoluteUrl('/media/images/2600x1600/1-dark.png')}');
+            background-image: url('${toAbsoluteUrl('/media/back.jpg')}');
           }
         `}
       </style>
@@ -36,16 +36,6 @@ const Layout = () => {
               />
             </Link>
 
-            <div className="flex flex-col gap-3">
-              <h3 className="text-2xl font-semibold text-gray-900">Secure Access Portal</h3>
-              <div className="text-base font-medium text-gray-600">
-                A robust authentication gateway ensuring
-                <br /> secure&nbsp;
-                <span className="text-gray-900 font-semibold">efficient user access</span>
-                &nbsp;to the Metronic
-                <br /> Dashboard interface.
-              </div>
-            </div>
           </div>
         </div>
       </div>

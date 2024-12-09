@@ -9,6 +9,7 @@ import { DropdownChat } from '@/partials/dropdowns/chat';
 import { ModalSearch } from '@/partials/modals/search/ModalSearch';
 import { useLanguage } from '@/i18n';
 import { useAuthContext } from '@/auth';
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 const HeaderTopbar = () => {
   const { isRTL } = useLanguage();
@@ -63,30 +64,6 @@ const HeaderTopbar = () => {
         </MenuItem>
       </Menu>
 
-      <Menu>
-        <MenuItem
-          ref={itemAppsRef}
-          toggle="dropdown"
-          trigger="click"
-          dropdownProps={{
-            placement: isRTL() ? 'bottom-start' : 'bottom-end',
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: isRTL() ? [-10, 10] : [10, 10]
-                }
-              }
-            ]
-          }}
-        >
-          <MenuToggle className="btn btn-icon btn-icon-lg size-9 rounded-full hover:bg-primary-light hover:text-primary dropdown-open:bg-primary-light dropdown-open:text-primary text-gray-500">
-            <KeenIcon icon="element-11" />
-          </MenuToggle>
-
-          {DropdownApps()}
-        </MenuItem>
-      </Menu>
 
       <Menu>
         <MenuItem
@@ -132,7 +109,7 @@ const HeaderTopbar = () => {
           <MenuToggle className="btn btn-icon rounded-full">
             <img
               className="size-9 rounded-full border-2 border-success shrink-0"
-              src={toAbsoluteUrl(currentUser?.avatar??'/media/avatars/300-2.png')}
+              src={API_URL+currentUser?.avatar??toAbsoluteUrl('/media/avatars/300-2.png')}
               alt=""
             />
           </MenuToggle>

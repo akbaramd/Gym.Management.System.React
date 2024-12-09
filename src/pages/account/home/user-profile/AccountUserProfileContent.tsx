@@ -16,7 +16,7 @@ const AccountUserProfileContent = () => {
         <div className="grid gap-5 lg:gap-7.5">
           <PersonalInfo />
 
-          <BasicSettings title="Basic Settings" />
+          <BasicSettings title="ویرایش پروفایل" />
 
           <Work />
 
