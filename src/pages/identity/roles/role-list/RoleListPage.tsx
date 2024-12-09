@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteRoles } from '@/store/slices/roles/actions';
 import { selectSelectedRoleIds } from '@/store/slices/roles/selectors';
 import { useAppDispatch } from '@/store';
-import { useDataGrid } from '@/components';
 
 
 const RoleListPage = () => {

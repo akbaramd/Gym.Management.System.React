@@ -8,6 +8,7 @@ import { DropdownApps } from '@/partials/dropdowns/apps';
 import { DropdownChat } from '@/partials/dropdowns/chat';
 import { ModalSearch } from '@/partials/modals/search/ModalSearch';
 import { useLanguage } from '@/i18n';
+import { useAuthContext } from '@/auth';
 
 const HeaderTopbar = () => {
   const { isRTL } = useLanguage();
@@ -19,7 +20,7 @@ const HeaderTopbar = () => {
   const handleShow = () => {
     window.dispatchEvent(new Event('resize'));
   };
-
+  const { currentUser } = useAuthContext();
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const handleOpen = () => setSearchModalOpen(true);
   const handleClose = () => {
@@ -131,7 +132,7 @@ const HeaderTopbar = () => {
           <MenuToggle className="btn btn-icon rounded-full">
             <img
               className="size-9 rounded-full border-2 border-success shrink-0"
-              src={toAbsoluteUrl('/media/avatars/300-2.png')}
+              src={toAbsoluteUrl(currentUser?.avatar??'/media/avatars/300-2.png')}
               alt=""
             />
           </MenuToggle>

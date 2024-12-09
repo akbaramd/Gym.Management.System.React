@@ -19,7 +19,7 @@ const passwordSchema = Yup.object().shape({
 
 const ResetPasswordChange = () => {
   const { currentLayout } = useLayout();
-  const { changePassword } = useAuthContext();
+  // const { changePassword } = useAuthContext();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
@@ -48,7 +48,7 @@ const ResetPasswordChange = () => {
       }
 
       try {
-        await changePassword(email, token, values.newPassword, values.confirmPassword);
+        // await changePassword(email, token, values.newPassword, values.confirmPassword);
         setHasErrors(false);
         navigate(
           currentLayout?.name === 'auth-branded'

@@ -23,6 +23,7 @@ interface IDropdownUserProps {
 
 const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
   const { settings, storeSettings } = useSettings();
+  const { currentUser } = useAuthContext();
   const { logout } = useAuthContext();
   const { isRTL } = useLanguage();
 
@@ -40,25 +41,25 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
         <div className="flex items-center gap-2">
           <img
             className="size-9 rounded-full border-2 border-success"
-            src={toAbsoluteUrl('/media/avatars/300-2.png')}
+            src={toAbsoluteUrl(currentUser?.avatar??"/media/avatars/300-2.png")}
             alt=""
           />
           <div className="flex flex-col gap-1.5">
             <Link
               to="/account/hoteme/get-stard"
-              className="text-sm text-gray-800 hover:text-primary font-semibold leading-none"
+              className="text-xs text-gray-800 hover:text-primary font-semibold leading-none"
             >
-              Cody Fisher
+              {currentUser?.firstName} {currentUser?.lastName}
             </Link>
             <a
               href="mailto:c.fisher@gmail.com"
               className="text-xs text-gray-600 hover:text-primary font-medium leading-none"
             >
-              c.fisher@gmail.com
+              {currentUser?.phoneNumber}
             </a>
           </div>
         </div>
-        <span className="badge badge-xs badge-primary badge-outline">Pro</span>
+        {/*<span className="badge badge-xs badge-primary badge-outline">Pro</span>*/}
       </div>
     );
   };

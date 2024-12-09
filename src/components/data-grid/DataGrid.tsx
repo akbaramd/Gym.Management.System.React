@@ -60,7 +60,7 @@ export interface TDataGridProps<TData extends object> {
   children?: ReactNode;
 }
 export const DataGrid = <TData extends object>(props: TDataGridProps<TData>) => {
-  const { resetRowSelection, ...otherContext } = useDataGrid();
+
 
   return (
     <DataGridProvider {...props}>

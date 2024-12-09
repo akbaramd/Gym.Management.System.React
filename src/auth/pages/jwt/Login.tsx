@@ -10,11 +10,10 @@ import { useLayout } from '@/providers';
 import { Alert } from '@/components';
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Wrong email format')
+  phone: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
+    .required('Phone is required'),
   password: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
@@ -23,8 +22,8 @@ const loginSchema = Yup.object().shape({
 });
 
 const initialValues = {
-  email: 'demo@keenthemes.com',
-  password: 'demo1234',
+  phone: '0987654321',
+  password: 'Admin@123456',
   remember: false
 };
 
@@ -48,12 +47,12 @@ const Login = () => {
           throw new Error('JWTProvider is required for this form.');
         }
 
-        await login(values.email, values.password);
+        await login(values.phone, values.password);
 
         if (values.remember) {
-          localStorage.setItem('email', values.email);
+          localStorage.setItem('phone', values.phone);
         } else {
-          localStorage.removeItem('email');
+          localStorage.removeItem('phone');
         }
 
         navigate(from, { replace: true });
@@ -126,20 +125,20 @@ const Login = () => {
         {formik.status && <Alert variant="danger">{formik.status}</Alert>}
 
         <div className="flex flex-col gap-1">
-          <label className="form-label text-gray-900">Email</label>
+          <label className="form-label text-gray-900">Phone</label>
           <label className="input">
             <input
               placeholder="Enter username"
               autoComplete="off"
-              {...formik.getFieldProps('email')}
+              {...formik.getFieldProps('phone')}
               className={clsx('form-control', {
-                'is-invalid': formik.touched.email && formik.errors.email
+                'is-invalid': formik.touched.phone && formik.errors.phone
               })}
             />
           </label>
-          {formik.touched.email && formik.errors.email && (
+          {formik.touched.phone && formik.errors.phone && (
             <span role="alert" className="text-danger text-xs mt-1">
-              {formik.errors.email}
+              {formik.errors.phone}
             </span>
           )}
         </div>

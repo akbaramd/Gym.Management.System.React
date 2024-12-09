@@ -1,24 +1,25 @@
-import { type TLanguageCode } from '@/i18n';
-
 export interface AuthModel {
-  access_token: string;
-  refreshToken?: string;
-  api_token: string;
+  sessionId: string;          // uuid
+  userId: string;             // uuid
+  ipAddress: {
+    value: string | null;
+  };
+  device: {
+    value: string | null;
+  };
+  lastUpdatedAt: string;      // date-time
+  lastActivityAt: string | null;
+  status: string | null;
+  accessToken: string;
+  expiredAt: string;          // date-time
+  expiredAfter: string;       // date-span
 }
 
 export interface UserModel {
-  id: number;
-  username: string;
-  password: string | undefined;
-  email: string;
-  first_name: string;
-  last_name: string;
-  fullname?: string;
-  occupation?: string;
-  companyName?: string;
-  phone?: string;
-  roles?: number[];
-  pic?: string;
-  language?: TLanguageCode;
-  auth?: AuthModel;
+  userId: string;             // uuid
+  firstName: string | null;
+  lastName: string | null;
+  phoneNumber: string | null;
+  nationalCode: string | null;
+  avatar: string | null;
 }
